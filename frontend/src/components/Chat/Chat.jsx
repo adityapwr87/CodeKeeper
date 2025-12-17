@@ -55,13 +55,7 @@ const Chat = () => {
     fetchReceiverData();
   }, [id, receiver, navigate]);
 
-  // --- Effect 3: Socket & Chat History ---
-  // Inside Chat.jsx
-
-  // --- Effect 3: Socket, Chat History & Seen Status ---
-  // --- Effect 3: Socket, Chat History & Seen Status ---
   useEffect(() => {
-    // strict check before starting
     if (!currentUser?._id || !receiver?._id) return;
 
     const roomId = [currentUser._id, receiver._id].sort().join("-");
@@ -117,21 +111,13 @@ const Chat = () => {
 
         scrollToBottom();
       }
-
-      // CASE 2: I sent the message (Outgoing)
-      // 🛑 FIX: Do nothing here!
-      // We already added this message in handleSendMessage (Optimistic Update).
     }
   };
 
-    // 4. Listener: When the OTHER person reads MY messages (Blue Ticks)
     const handleSeenStatus = (data) => {
-      // Backend sends: { senderId: ME, receiverId: OTHER_GUY }
-      // We check if the person who read (receiverId) is the person we are currently chatting with
       if (data.receiverId === receiver._id) {
         setMessages((prev) =>
           prev.map((msg) =>
-            // Update all my sent messages to seen: true
             msg.sender === currentUser._id ? { ...msg, seen: true } : msg
           )
         );

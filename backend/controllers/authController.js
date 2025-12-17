@@ -1,15 +1,11 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-// Helper to generate JWT Token
 const generateToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-// ===========================
-// SIGNUP CONTROLLER
-// ===========================
 exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -30,10 +26,8 @@ exports.signup = async (req, res) => {
         .json({ message: "Email is already registered. Please login." });
     }
 
-    // 3. Create User (Password is hashed automatically by User model pre-save hook)
     const user = await User.create({ username, email, password });
 
-    // 4. Generate Token
     const token = generateToken(user._id);
 
     res.status(201).json({
@@ -47,13 +41,10 @@ exports.signup = async (req, res) => {
   }
 };
 
-// ===========================
-// LOGIN CONTROLLER
-// ===========================
+
 exports.login = async (req, res) => {
   try {
-    // We accept 'email' from frontend, but we treat it as 'emailOrUsername'
-    // to allow flexibility in the database query.
+
     const { email, password } = req.body;
 
     // 1. Find user by Email OR Username

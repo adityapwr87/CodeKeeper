@@ -10,7 +10,7 @@ const {
   getBookmarksInFolder,
   removeBookmarkFromFolder,
 } = require("../controllers/folderController");
-const protect = require("../middleware/authMiddleware");
+const protect = require("../middleware/authmiddleware");
 
 // Folder CRUD
 router.post("/", protect,createFolder);

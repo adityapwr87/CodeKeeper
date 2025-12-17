@@ -1,9 +1,7 @@
 const Problem = require("../models/Problem");
-const User = require("../models/User"); // Import User model
+const User = require("../models/User"); 
 const Bookmark=require("../models/Bookmark");
-// @desc    Get all problems for the logged-in user
-// @route   GET /api/problems
-// @access  Private
+
 exports.getProblems = async (req, res) => {
   try {
     const problems = await Problem.find({}).sort({ createdAt: -1 }).limit(100);

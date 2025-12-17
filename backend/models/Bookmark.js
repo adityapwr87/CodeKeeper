@@ -7,7 +7,6 @@ const bookmarkSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
-    // Optional: Link to original problem if it came from the main feed
     originalProblemId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Problem",

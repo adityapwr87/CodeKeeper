@@ -53,7 +53,6 @@ const io = new Server(server, {
 // 🔥 SOCKET EVENTS
 // ===========================
 io.on("connection", (socket) => {
-  console.log("New client connected →", socket.id);
 
   // Join user's personal room
   socket.on("join", ({ userId }) => {
@@ -133,8 +132,5 @@ io.on("connection", (socket) => {
   });
 });
 
-// ===========================
-// START SERVER
-// ===========================
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

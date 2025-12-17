@@ -23,7 +23,6 @@ const problemSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    // --- NEW: Comments Section ---
     comments: [
       {
         user: {
@@ -31,7 +30,7 @@ const problemSchema = new mongoose.Schema(
           ref: "User",
           required: true,
         },
-        username: { type: String, required: true }, // Store username to display easily
+        username: { type: String, required: true }, 
         text: { type: String, required: true },
         createdAt: {
           type: Date,

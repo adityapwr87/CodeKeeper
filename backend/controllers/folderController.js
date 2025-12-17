@@ -1,9 +1,7 @@
 const Folder = require("../models/Folder");
 const Bookmark = require("../models/Bookmark");
 
-/* ===============================
-   CREATE FOLDER
-================================ */
+
 exports.createFolder = async (req, res) => {
   try {
     const { name, description } = req.body;
@@ -26,9 +24,7 @@ exports.createFolder = async (req, res) => {
   }
 };
 
-/* ===============================
-   GET ALL FOLDERS
-================================ */
+
 exports.getFolders = async (req, res) => {
   try {
     const folders = await Folder.find({ user: req.user.id }).sort({
@@ -43,9 +39,7 @@ exports.getFolders = async (req, res) => {
   }
 };
 
-/* ===============================
-   GET FOLDER BY ID (WITH BOOKMARKS)
-================================ */
+
 exports.getFolderById = async (req, res) => {
   try {
     const folder = await Folder.findOne({
@@ -68,9 +62,7 @@ exports.getFolderById = async (req, res) => {
   }
 };
 
-/* ===============================
-   RENAME FOLDER
-================================ */
+
 exports.renameFolder = async (req, res) => {
   try {
     const { name } = req.body;
@@ -97,9 +89,7 @@ exports.renameFolder = async (req, res) => {
   }
 };
 
-/* ===============================
-   DELETE FOLDER + ITS BOOKMARKS
-================================ */
+
 exports.deleteFolder = async (req, res) => {
   try {
     const { folderId } = req.params;
@@ -126,9 +116,7 @@ exports.deleteFolder = async (req, res) => {
   }
 };
 
-/* ===============================
-   CREATE BOOKMARK IN FOLDER
-================================ */
+
 exports.createBookmarkInFolder = async (req, res) => {
   try {
     const { folderId } = req.params;
@@ -168,9 +156,7 @@ exports.createBookmarkInFolder = async (req, res) => {
   }
 };
 
-/* ===============================
-   GET BOOKMARKS IN FOLDER
-================================ */
+
 exports.getBookmarksInFolder = async (req, res) => {
   try {
     const folder = await Folder.findOne({
@@ -193,9 +179,7 @@ exports.getBookmarksInFolder = async (req, res) => {
   }
 };
 
-/* ===============================
-   REMOVE BOOKMARK FROM FOLDER
-================================ */
+
 exports.removeBookmarkFromFolder = async (req, res) => {
   try {
     const { folderId, bookmarkId } = req.params;
