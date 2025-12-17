@@ -1,0 +1,97 @@
+/* src/pages/Auth.css */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  /* Very subtle glow in the center */
+  background-image: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 60%);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px;
+  /* Soft shadow to lift it off the black bg */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  animation: slideUp 0.4s ease-out;
+}
+
+.auth-title {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 35px;
+}
+
+/* FORM ELEMENTS */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px;
+  background: black; /* Input is darker than card */
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.form-input::placeholder {
+  color: #3f3f46;
+}
+
+/* FOOTER */
+.auth-footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.auth-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  color: var(--accent-primary);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

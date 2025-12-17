@@ -1,0 +1,49 @@
+.folder-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+.folder-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.folder-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+.folder-header .muted {
+  color: #b6b6c3;
+  font-size: 0.95rem;
+}
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.back-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+}
+.bookmarks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.bookmark-card {
+  max-width: 100%;
+}
+
+.bookmark-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.bookmark-card .prob-title {
+  font-size: 1.15rem;
+}

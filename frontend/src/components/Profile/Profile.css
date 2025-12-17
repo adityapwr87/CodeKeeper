@@ -1,0 +1,536 @@
+/* Import a clean font (Google Fonts recommendation) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --bg-dark: #0f0c29; /* Deep dark purple background */
+  --card-bg: rgba(255, 255, 255, 0.05); /* Glass effect */
+  --primary-gradient: linear-gradient(90deg, #b000dd 0%, #d40087 100%);
+  --secondary-bg: #2b2b3d;
+  --text-white: #ffffff;
+  --text-gray: #a0a0b0;
+  --border-radius: 16px;
+  --neon-glow: 0 0 15px rgba(176, 0, 221, 0.4);
+}
+
+.profile-wrapper {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  color: var(--text-white);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* --- Search Bar Styling --- */
+.search-bar-container {
+  width: 100%;
+  background-color: #0f0c29;
+  display: flex;
+  justify-content: center;
+  padding: 12px 20px;
+}
+.user-search {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-white);
+  font-size: 1rem;
+}
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.btn-send {
+  background: var(--primary-gradient);
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  height: 43.2px;
+  width: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-send:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+@media (max-width: 500px) {
+  .user-search {
+    gap: 6px;
+  }
+  .search-input {
+    font-size: 0.95rem;
+  }
+  .btn-send {
+    padding: 8px 12px;
+  }
+}
+
+.profile-container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* --- SIDEBAR STYLING --- */
+.profile-sidebar {
+  width: 320px;
+  background: linear-gradient(
+    180deg,
+    rgba(40, 20, 60, 0.6) 0%,
+    rgba(20, 20, 30, 0.4) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-ring {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  padding: 4px; /* Space for the gradient border */
+  background: var(--primary-gradient); /* The glowing ring */
+  box-shadow: var(--neon-glow);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.avatar-ring::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Imitating the small yellow arrow/icon on top of avatar in your img */
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ffcc00;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-dark); /* Inner border to separate img from ring */
+  background: #000;
+}
+
+.user-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.user-handle {
+  color: #c084fc; /* Light purple */
+  font-size: 1rem;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+
+.btn-secondary {
+  background: var(--secondary-bg);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.profile-details {
+  width: 100%;
+  text-align: left;
+}
+
+.section-label {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: var(--text-white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  color: var(--text-gray);
+  font-size: 0.95rem;
+}
+
+.detail-icon {
+  color: #d40087; /* Pinkish icon color */
+  font-size: 1.1rem;
+}
+
+.email-text {
+  word-break: break-all;
+}
+
+/* --- MAIN CONTENT STYLING --- */
+.profile-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.start-chat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.start-chat-btn {
+  margin-bottom: 10px;
+}
+
+.info-card,
+.platform-card,
+.skill-tag {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.info-card {
+  padding: 20px;
+  color: var(--text-gray);
+  min-height: 80px;
+}
+
+/* Platform Grid */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.platform-card {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: var(--text-white);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.platform-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  border-color: rgba(176, 0, 221, 0.5);
+}
+
+.platform-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.platform-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.link-icon {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+}
+
+/* Skills Section */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  padding: 10px 20px;
+  background: rgba(176, 0, 221, 0.15); /* Purple tint */
+  border: 1px solid rgba(176, 0, 221, 0.3);
+  border-radius: 50px; /* Pill shape */
+  font-size: 0.9rem;
+  color: #e0b0ff;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  .profile-sidebar {
+    width: 100%;
+  }
+}
+
+/* --- EDIT MODAL STYLES --- */
+.modal-overlay {
+  position: fixed; /* Stays in place relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centers the modal vertically */
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: #1a1a2e; /* Dark purple/blue base */
+  border: 1px solid rgba(176, 0, 221, 0.3);
+  box-shadow: 0 0 20px rgba(176, 0, 221, 0.2);
+  border-radius: 16px;
+
+  /* Sizing to fit window */
+  width: 90%;
+  max-width: 500px;
+
+  /* KEY: This limits height to 85% of screen and enables internal scrolling */
+  max-height: 85vh;
+  overflow-y: auto;
+
+  padding: 30px;
+  position: relative;
+  color: #fff;
+  animation: scaleUp 0.3s ease;
+}
+
+/* Custom Scrollbar for the Modal (Chrome/Safari) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #b000dd;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #d40087;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+
+  /* Keeps header sticky at top if you scroll deep into the form */
+  position: sticky;
+  top: -30px; /* Offset for padding */
+  background: #1a1a2e;
+  z-index: 10;
+  padding-top: 10px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #b000dd 0%, #d40087 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #a0a0b0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+/* Form Styles */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #a0a0b0;
+  font-weight: 500;
+}
+
+.form-input,
+.form-textarea,
+select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  width: 100%; /* Ensure inputs fill the modal width */
+  box-sizing: border-box; /* Prevents padding from breaking width */
+}
+
+/* Fix for Select Dropdown specific styling */
+select option {
+  background-color: #1a1a2e;
+  color: white;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #b000dd;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-save {
+  background: linear-gradient(90deg, #b000dd 0%, #d40087 100%);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(176, 0, 221, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

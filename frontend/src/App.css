@@ -1,0 +1,78 @@
+/* src/App.css */
+:root {
+  /* Core Colors */
+  --bg-color: #000000;         /* Pure Black */
+  --card-bg: #0a0a0a;          /* Slightly lighter for cards */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;   /* Light Gray */
+  
+  /* Neon Accents (Glows better on black) */
+  --accent-primary: #2563eb;   /* Vivid Blue */
+  --accent-secondary: #7c3aed; /* Vivid Purple */
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(20, 20, 20, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* UTILITIES */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.highlight {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: black;
+  border: 1px solid white;
+}
+
+.btn-primary:hover {
+  background: black;
+  color: white;
+  border-color: white;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}

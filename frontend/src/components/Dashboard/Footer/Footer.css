@@ -1,0 +1,105 @@
+.footer-section {
+  background-color: #05010d;
+  padding: 80px 20px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto 70px;
+}
+
+/* --- HEADINGS --- */
+.footer-heading {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- LIST ITEMS --- */
+.footer-links li {
+  margin-bottom: 18px;
+  font-size: 1.15rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- ANCHOR TAGS (New Rule) --- */
+/* This ensures the link takes up the whole space and aligns the icons */
+.footer-links li a, 
+.footer-links li {
+  text-decoration: none;
+  color: #a8a8b3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%; /* Make clickable area wide */
+  cursor: pointer;
+}
+
+/* --- HOVER EFFECT --- */
+.footer-links li:hover {
+  transform: translateX(10px);
+}
+
+/* We target the <a> tag color on hover too */
+.footer-links li:hover a,
+.footer-links li:hover {
+  color: #ffffff;
+}
+
+/* --- BRAND LOGO COLORS --- */
+.brand-icon {
+  font-size: 1.3rem;
+}
+
+.link-arrow { margin-left: auto; font-size: 0.9rem; opacity: 0.3; transition: opacity 0.2s; }
+.footer-links li:hover .link-arrow { opacity: 1; }
+
+/* 1. Codeforces */
+.platform-link.cf .brand-icon { color: #1F8DD6; }
+.platform-link.cf:hover a { text-shadow: 0 0 10px rgba(31, 141, 214, 0.4); }
+
+/* 2. LeetCode */
+.platform-link.lc .brand-icon { color: #FFA116; }
+.platform-link.lc:hover a { text-shadow: 0 0 10px rgba(255, 161, 22, 0.4); }
+
+/* 3. GeeksForGeeks */
+.platform-link.gfg .brand-icon { color: #2F8D46; }
+.platform-link.gfg:hover a { text-shadow: 0 0 10px rgba(47, 141, 70, 0.4); }
+
+/* 4. AtCoder */
+.at-badge {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+.platform-link.at:hover .at-badge { background-color: #d946ef; color: white; }
+
+/* 5. CodeChef */
+.platform-link.cc .brand-icon { color: #bfa38f; }
+
+
+/* --- FOOTER BOTTOM --- */
+.footer-bottom {
+  text-align: center;
+  color: #52525b;
+  font-size: 0.9rem;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

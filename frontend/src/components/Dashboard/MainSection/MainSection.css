@@ -1,0 +1,142 @@
+/* Hero Styles */
+.hero-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(5, 1, 13, 0) 70%
+  );
+}
+
+.hero-icon-badge {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #d946ef, #8b5cf6);
+  border-radius: 50%;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 0 30px rgba(217, 70, 239, 0.5);
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: white;
+}
+.hero-text {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  text-align: center;
+  font-size: 25px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #eae6f5;
+  border-radius: 8px;
+}
+
+.hero-text .brand {
+  color: #c084fc;
+  font-weight: 600;
+}
+
+/* Controlled line break (instead of <br/>) */
+.hero-text .line-break {
+  display: block;
+  margin-top: 8px;
+}
+
+/* Feature Styles */
+.features-section {
+  padding: 60px 0 100px;
+  background-color: #0b0217;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-subtitle {
+  color: #a8a8b3;
+  font-size: 1.1rem;
+}
+
+.highlight-pink {
+  background: linear-gradient(90deg, #d946ef, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.feature-card {
+  background-color: #1a0b38;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background-color: #220e46;
+}
+
+.f-icon-box {
+  min-width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.f-icon-box.pink {
+  background: #d946ef;
+  box-shadow: 0 4px 20px rgba(217, 70, 239, 0.3);
+}
+.f-icon-box.purple {
+  background: #8b5cf6;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+}
+
+.f-content h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+}
+.f-content p {
+  color: #a8a8b3;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.section-header .section-title {
+  display: flex;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  text-align: center;
+}
+

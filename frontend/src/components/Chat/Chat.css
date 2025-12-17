@@ -1,0 +1,238 @@
+/* Chat.css - Modern Black Theme */
+
+:root {
+  --bg-color: #000000;
+  --header-bg: #0a0a0a;
+  --input-bg: #111111;
+  --my-bubble-bg: #252525;
+  --their-bubble-bg: #0f0f0f;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent-color: #ffffff;
+  --border-color: #222222;
+}
+
+/* Container */
+.chat-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden; /* Prevents double scrollbars */
+}
+
+/* Loading State */
+.chat-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+}
+
+/* Header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.header-avatar, .header-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-avatar-placeholder {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50; /* Green for online */
+  border-radius: 50%;
+  border: 2px solid var(--header-bg);
+}
+
+.user-details h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.status-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Messages Area */
+.messages-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Scrollbar styling for Webkit */
+}
+
+.messages-area::-webkit-scrollbar {
+  width: 6px;
+}
+.messages-area::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 3px;
+}
+
+/* Message Bubbles */
+.message-row {
+  display: flex;
+  width: 100%;
+}
+
+.my-message {
+  justify-content: flex-end;
+}
+
+.their-message {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 10px 16px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.my-message .bubble {
+  background-color: var(--my-bubble-bg);
+  border-bottom-right-radius: 4px;
+  border: 1px solid #333;
+}
+
+.their-message .bubble {
+  background-color: var(--their-bubble-bg);
+  border-bottom-left-radius: 4px;
+  border: 1px solid #222;
+}
+
+.message-text {
+  margin: 0;
+  font-size: 15px;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.time {
+  font-size: 10px;
+  color: #666;
+}
+
+.read-receipt {
+  font-size: 14px;
+  color: var(--text-secondary); /* Turn blue if read logic is added: color: #34b7f1 */
+}
+
+/* Input Area */
+.input-area {
+  padding: 15px 20px;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--input-bg);
+  border-radius: 25px;
+  padding: 5px 15px;
+  border: 1px solid var(--border-color);
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
+}
+
+.send-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary); /* White send button */
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  transition: transform 0.1s;
+}
+
+.send-btn:active {
+  transform: scale(0.9);
+}
+
+/* Add this to Chat.css */
+
+.read-receipt {
+  font-size: 16px;
+  color: #666; /* Grey by default (Sent/Delivered) */
+  transition: color 0.3s ease;
+}
+
+.read-receipt.seen {
+  color: #34b7f1; /* Bright Blue (Read) */
+}

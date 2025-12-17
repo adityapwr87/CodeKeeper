@@ -1,0 +1,381 @@
+/* Calendar Container */
+.calendar-container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Header */
+.calendar-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.calendar-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.calendar-header p {
+  color: #a8a8b3;
+  font-size: 1rem;
+}
+
+/* Controls */
+.calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.calendar-controls h2 {
+  color: white;
+  font-size: 1.5rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.nav-btn {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Loading / Error */
+.loading-text {
+  text-align: center;
+  color: #a8a8b3;
+  font-size: 1rem;
+  padding: 40px;
+}
+
+.error-text {
+  text-align: center;
+  color: #ef4444;
+  font-size: 1rem;
+  padding: 40px;
+}
+
+/* Calendar Grid */
+.calendar-wrapper {
+  margin-bottom: 60px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+/* Day Headers */
+.day-header {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.2),
+    rgba(59, 130, 246, 0.2)
+  );
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 12px;
+  text-align: center;
+  font-weight: 700;
+  color: #c4b5fd;
+  border-radius: 8px;
+}
+
+/* Calendar Days */
+.calendar-day {
+  background: #13062b;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  min-height: auto;
+  pointer-events: none;
+}
+
+.calendar-day.active:hover {
+  background: #1a0b38;
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+  transform: translateY(-4px);
+}
+
+.day-number {
+  font-weight: 700;
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.contests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.contest-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.3),
+    rgba(99, 102, 241, 0.3)
+  );
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.contest-link:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.5),
+    rgba(99, 102, 241, 0.5)
+  );
+  border-color: rgba(139, 92, 246, 0.8);
+}
+
+.contest-name {
+  color: #c4b5fd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contest-platform {
+  color: #a5f3fc;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.no-contest {
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Upcoming Contests Section */
+.upcoming-contests {
+  margin-top: 60px;
+  padding: 30px;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 2, 23, 0.8) 0%,
+    rgba(26, 11, 56, 0.9) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+}
+
+.upcoming-contests h2 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.contests-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contest-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.contest-row:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateX(4px);
+}
+
+.contest-info h4 {
+  color: white;
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.contest-time {
+  color: #c4b5fd;
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.contest-platform {
+  color: #a5f3fc;
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+}
+
+.btn-visit {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    gap: 6px;
+  }
+
+  .calendar-day {
+    min-height: 140px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .calendar-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .calendar-controls h2 {
+    min-width: auto;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .calendar-day {
+    min-height: 120px;
+    padding: 8px;
+  }
+
+  .day-number {
+    font-size: 0.95rem;
+  }
+
+  .contest-name {
+    font-size: 0.7rem;
+  }
+
+  .contests-table {
+    gap: 8px;
+  }
+
+  .contest-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn-visit {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .calendar-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .calendar-grid {
+    gap: 2px;
+  }
+
+  .calendar-day {
+    min-height: 100px;
+    padding: 6px;
+  }
+
+  .day-header {
+    padding: 8px 4px;
+    font-size: 0.85rem;
+  }
+
+  .day-number {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
+  .contests-list {
+    gap: 3px;
+  }
+
+  .contest-link {
+    padding: 4px 6px;
+  }
+
+  .contest-name {
+    font-size: 0.65rem;
+  }
+
+  .contest-platform {
+    font-size: 0.6rem;
+  }
+
+  .contest-info h4 {
+    font-size: 0.95rem;
+  }
+
+  .contest-time,
+  .contest-platform {
+    font-size: 0.8rem;
+  }
+}
