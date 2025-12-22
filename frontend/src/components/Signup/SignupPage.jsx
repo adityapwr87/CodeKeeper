@@ -15,14 +15,22 @@ const Signup = () => {
   });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await signup(formData);
+     const { data } = await signup(formData);
+       localStorage.setItem("token", data.token);
+       localStorage.setItem("user", JSON.stringify(data.user));
+       if (window.chrome?.storage) {
+         chrome.storage.local.set({
+           codekeeper_token: data.token,
+         });
+       }
       navigate("/dashboard"); // Redirect to login on success
       toast.success("Signed Up successfully!", {
         position: "top-right",
@@ -34,6 +42,9 @@ const Signup = () => {
       });
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");
+    }
+    finally {
+       setLoading(false);
     }
   };
 
@@ -107,8 +118,9 @@ const Signup = () => {
               type="submit"
               className="btn btn-primary"
               style={{ width: "100%" }}
+              disabled={loading}
             >
-              Sign Up
+              {loading ? <span className="loader"></span> : "Sign Up"}
             </button>
           </form>
 

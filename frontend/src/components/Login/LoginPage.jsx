@@ -11,17 +11,24 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await login(formData);
       // Save token (adjust based on your actual response structure)
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
+      if (window.chrome?.storage) {
+        chrome.storage.local.set({
+          codekeeper_token: data.token,
+        });
+      }
+
       navigate("/dashboard"); // Redirect to Home or Dashboard
       toast.success("Logged In successfully!", {
         position: "top-right",
@@ -33,6 +40,9 @@ const Login = () => {
       });
     } catch (err) {
       setError(err.response?.data?.error || "Invalid credentials");
+    }
+    finally {
+       setLoading(false);
     }
   };
 
@@ -95,8 +105,9 @@ const Login = () => {
               type="submit"
               className="btn btn-primary"
               style={{ width: "100%" }}
+              disabled={loading}
             >
-              Login
+              {loading ? <span className="loader"></span> : "Log In"}
             </button>
           </form>
 
