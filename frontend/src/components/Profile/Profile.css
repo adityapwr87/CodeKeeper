@@ -241,6 +241,28 @@
   gap: 10px;
 }
 
+.logout-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-logout {
+  background: red;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 20px;
+}
+
+.btn-logout:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
 .start-chat {
   display: flex;
   justify-content: space-between;

@@ -1,28 +1,50 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import Home from "./components/Home/Home";
 import LoginPage from "./components/Login/LoginPage";
 import SignupPage from "./components/Signup/SignupPage";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
 import Dashboard from "./components/Dashboard/Dashboard";
 import Problems from "./components/Problems/Problems";
 import MyBookmarks from "./components/MyBookmarks/MyBookmarks";
 import Folder from "./components/MyBookmarks/Folder";
 import Calendar from "./components/Calendar/Calendar";
 import Profile from "./components/Profile/Profile";
+import UserProfile from "./components/Profile/UserProfile";
 import ChatHistory from "./components/ChatHistory/ChatHistory";
 import Chat from "./components/Chat/Chat";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UserProfile from "./components/Profile/UserProfile";
+
 export default function App() {
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* ---------- ROOT ---------- */}
+        <Route
+          path="/"
+          element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <Home />}
+        />
 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        {/* ---------- AUTH ROUTES ---------- */}
+        <Route
+          path="/login"
+          element={
+           <LoginPage />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <SignupPage />
+          }
+        />
 
+        {/* ---------- PROTECTED ROUTES ---------- */}
         <Route
           path="/dashboard"
           element={
@@ -31,6 +53,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/problems"
           element={
@@ -39,6 +62,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/mybookmarks"
           element={
@@ -47,6 +71,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/folders/:id"
           element={
@@ -55,11 +80,21 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/calendar"
           element={
             <ProtectedRoute>
               <Calendar />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />
@@ -72,6 +107,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/chat/:id"
           element={
@@ -81,10 +117,18 @@ export default function App() {
           }
         />
 
-        {/* Public profile pages (username or 'me' for current user) */}
+        {/* ---------- PUBLIC PROFILE ---------- */}
         <Route path="/profile/:username" element={<UserProfile />} />
-        <Route path="/profile" element={<Profile />} />
+
+        {/* ---------- FALLBACK ---------- */}
+        <Route
+          path="*"
+          element={
+            <Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />
+          }
+        />
       </Routes>
+
       <ToastContainer
         position="top-right"
         theme="light"

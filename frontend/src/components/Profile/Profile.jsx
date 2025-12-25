@@ -95,6 +95,17 @@ const Profile = () => {
     setIsEditing(true);
   };
 
+  const handleLogout = () => {  
+      
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+    toast.success("Logged out successfully!", {
+      position: "top-right",
+      autoClose: 2000,
+    });
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -269,7 +280,12 @@ const Profile = () => {
           <div className="profile-content">
             {/* About Me */}
             <section className="info-section">
-              <h3 className="section-title">💫 About Me</h3>
+              <div className="logout-section">
+                <h3 className="section-title">💫 About Me</h3>
+                <button onClick={handleLogout} className="btn-logout">
+                  LogOut
+                </button>
+              </div>
               <div className="info-card">
                 <p>{user.bio || "No bio added yet."}</p>
               </div>
