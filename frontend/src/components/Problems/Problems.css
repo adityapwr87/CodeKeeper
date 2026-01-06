@@ -572,4 +572,47 @@
 .problem-card:hover {
   transform: none;
 }
+/* --- Audio Note Styling --- */
+
+.audio-player-wrapper {
+  background: rgba(255, 255, 255, 0.05); /* Subtle glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The "Voice Note" Label & Icon */
+.audio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #a0aec0; /* Light gray text */
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.audio-label svg {
+  color: #63b3ed; /* Light blue accent for the Mic icon */
+}
+
+.audio-player-wrapper audio {
+  width: 30%;
+  height: 36px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.audio-player-wrapper audio::-webkit-media-controls-panel {
+  background-color: #f7fafc; 
+}
+
+.audio-player-wrapper audio::-webkit-media-controls-enclosure {
+  border-radius: 6px;
+}
 

@@ -1,0 +1,186 @@
+/* --- Modal Overlay & Animation --- */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Darker backdrop */
+  backdrop-filter: blur(4px); /* Blur effect behind modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-modal-content {
+  background: #1a202c; /* Dark gray background */
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  border: 1px solid #2d3748;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Prevent modal from being taller than screen */
+  overflow-y: auto; /* Allow scrolling inside modal if content is long */
+}
+
+/* Animation class */
+.slide-in {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Header --- */
+.edit-modal-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid #2d3748;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.close-btn:hover {
+  color: #e53e3e;
+}
+
+/* --- Form --- */
+.edit-modal-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #cbd5e0;
+}
+
+.sub-label {
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* Inputs & Textareas */
+.modal-input,
+.modal-textarea {
+  background: #2d3748;
+  border: 1px solid #4a5568;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.modal-input:focus,
+.modal-textarea:focus {
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.2);
+}
+
+.modal-textarea {
+  resize: vertical; /* Allow resizing vertically only */
+  font-family: 'Fira Code', monospace; /* Nice for code */
+  min-height: 100px;
+}
+
+/* --- Audio Section --- */
+.audio-section {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px dashed #4a5568;
+}
+
+.audio-helper-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #ecc94b; /* Yellow warning color */
+  margin-top: 4px;
+}
+
+.icon-small {
+  font-size: 14px;
+}
+
+/* --- Buttons --- */
+.btn-update {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.btn-update:hover {
+  opacity: 0.9;
+}
+
+.btn-update:active {
+  transform: scale(0.98);
+}
+
+.btn-update:disabled {
+  background: #4a5568;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Scrollbar for the modal content */
+.edit-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.edit-modal-content::-webkit-scrollbar-track {
+  background: #1a202c;
+}
+.edit-modal-content::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 4px;
+}

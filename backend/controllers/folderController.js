@@ -1,6 +1,6 @@
 const Folder = require("../models/Folder");
 const Bookmark = require("../models/Bookmark");
-
+const uploadToS3 = require("../utils/s3Upload");
 
 exports.createFolder = async (req, res) => {
   try {
@@ -135,13 +135,34 @@ exports.createBookmarkInFolder = async (req, res) => {
       return res.status(404).json({ message: "Folder not found" });
     }
 
+    let parsedTags = [];
+    if (tags) {
+      if (typeof tags === "string") {
+        // Attempt to parse JSON string or split by comma
+        try {
+          parsedTags = JSON.parse(tags);
+        } catch (e) {
+          parsedTags = tags.split(",").map((tag) => tag.trim());
+        }
+      } else if (Array.isArray(tags)) {
+        parsedTags = tags;
+      }
+    }
+
+    let audioUrl = "";
+    if (req.file) {
+      // Pass folder name "voice-memos" to keep S3 organized
+      audioUrl = await uploadToS3(req.file, "voice-memos");
+    }
+
     const bookmark = await Bookmark.create({
       user: req.user.id,
       folder: folderId,
       title,
       link,
-      tags: tags || [],
+      tags: parsedTags,
       solution: solution || "",
+      audioUrl: audioUrl,
     });
 
     // Add bookmark to folder
@@ -173,6 +194,65 @@ exports.getBookmarksInFolder = async (req, res) => {
 
     return res.status(200).json(folder.bookmarks);
   } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server Error", error: error.message });
+  }
+};
+
+exports.updateBookmarkInFolder = async (req, res) => {
+  try {
+    const { folderId, bookmarkId } = req.params;
+    const { title, link, tags, solution } = req.body;
+
+    // 1. Find Bookmark and Verify Ownership
+    const bookmark = await Bookmark.findOne({
+      _id: bookmarkId,
+      user: req.user.id,
+    });
+
+    if (!bookmark) {
+      return res.status(404).json({ message: "Bookmark not found" });
+    }
+
+    // 2. Handle Tags Parsing (String -> Array)
+    let parsedTags = bookmark.tags; // Default to existing
+    if (tags) {
+      if (typeof tags === "string") {
+        try {
+          parsedTags = JSON.parse(tags);
+        } catch (e) {
+          parsedTags = tags
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter((t) => t);
+        }
+      } else if (Array.isArray(tags)) {
+        parsedTags = tags;
+      }
+    }
+
+    // 3. Handle Audio Upload (If a new file is sent)
+    let audioUrl = bookmark.audioUrl; // Default to existing URL
+    if (req.file) {
+      // Upload new file to S3
+      audioUrl = await uploadToS3(req.file, "voice-memos");
+    }
+    // Note: If req.file is undefined, we keep the old audioUrl.
+    // If you want logic to DELETE audio, you'd need a specific flag from frontend.
+
+    // 4. Update Fields
+    bookmark.title = title || bookmark.title;
+    bookmark.link = link || bookmark.link;
+    bookmark.solution = solution || bookmark.solution;
+    bookmark.tags = parsedTags;
+    bookmark.audioUrl = audioUrl;
+
+    await bookmark.save();
+
+    return res.status(200).json(bookmark);
+  } catch (error) {
+    console.error("Update Error:", error);
     return res
       .status(500)
       .json({ message: "Server Error", error: error.message });

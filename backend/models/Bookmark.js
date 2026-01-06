@@ -27,6 +27,10 @@ const bookmarkSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    audioUrl: {
+      type: String,
+      default: "",
+    },
     folder: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

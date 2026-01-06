@@ -54,6 +54,8 @@ export const addBookmarkToFolder = (folderId, data) =>
 
 export const removeBookmarkFromFolder = (folderId, bookmarkId) =>
   API.delete(`/folders/${folderId}/bookmark/${bookmarkId}`);
+export const updateBookmarkInFolder = (folderId, bookmarkId, data) =>
+  API.put(`/folders/${folderId}/bookmark/${bookmarkId}`, data);
 
 
 export const getMyProfile = () => API.get("/users/profile");

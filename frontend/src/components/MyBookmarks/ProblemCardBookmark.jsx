@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { FiTrash2, FiExternalLink, FiCode } from "react-icons/fi";
+import {
+  FiTrash2,
+  FiExternalLink,
+  FiCode,
+  FiEdit2,
+  FiMic,
+} from "react-icons/fi";
 
-const ProblemCardBookmark = ({ data, onRemove, isRemoving }) => {
+const ProblemCardBookmark = ({ data, onRemove, onEdit, isRemoving }) => {
   const [showSolution, setShowSolution] = useState(false);
 
   return (
@@ -10,13 +16,23 @@ const ProblemCardBookmark = ({ data, onRemove, isRemoving }) => {
       <div className="card-top">
         <h3 className="prob-title">{data.title}</h3>
 
-        <button
-          className="btn-icon"
-          onClick={() => onRemove(data._id)}
-          disabled={isRemoving}
-        >
-          <FiTrash2 />
-        </button>
+        <div className="card-actions-top">
+          {/* ✅ Edit Button */}
+          <button
+            className="btn-icon edit"
+            onClick={() => onEdit(data)} // Pass full data to parent
+          >
+            <FiEdit2 />
+          </button>
+
+          <button
+            className="btn-icon delete"
+            onClick={() => onRemove(data._id)}
+            disabled={isRemoving}
+          >
+            <FiTrash2 />
+          </button>
+        </div>
       </div>
 
       {/* Tags */}
@@ -38,9 +54,19 @@ const ProblemCardBookmark = ({ data, onRemove, isRemoving }) => {
         <FiExternalLink /> View Problem
       </a>
 
-      {/* Actions */}
+      {/* ✅ Audio Player (Only if audioUrl exists) */}
+      {data.audioUrl && (
+        <div className="audio-player-wrapper mt-3 mb-2">
+          <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+            <FiMic /> <span>Voice Note</span>
+          </div>
+          <audio controls src={data.audioUrl} className="w-full h-8" />
+        </div>
+      )}
+
+      {/* Solution Toggle */}
       {data.solution && (
-        <div className="card-actions">
+        <div className="card-actions mt-2">
           <button
             className={`btn-green ${showSolution ? "active" : ""}`}
             onClick={() => setShowSolution(!showSolution)}
@@ -50,7 +76,7 @@ const ProblemCardBookmark = ({ data, onRemove, isRemoving }) => {
         </div>
       )}
 
-      {/* Solution */}
+      {/* Solution Block */}
       {showSolution && (
         <div className="solution-box fade-in">
           <div className="solution-header">
