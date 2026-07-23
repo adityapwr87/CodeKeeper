@@ -5,7 +5,6 @@ exports.getChatHistory = async (req, res) => {
   try {
     const currentUserId = req.user._id;
 
-    // Use MongoDB Aggregation for maximum efficiency
     const orderedUsers = await Message.aggregate([
       {
         $match: {

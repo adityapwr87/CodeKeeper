@@ -329,6 +329,42 @@ exports.removeBookmarkFromFolder = async (req, res) => {
   }
 };
 
+const makeSubfoldersPublicRecursively = async (folderId, userId) => {
+  const folder = await Folder.findOne({ _id: folderId, user: userId });
+  if (!folder) return;
+
+  if (folder.subfolders && folder.subfolders.length > 0) {
+    for (const subId of folder.subfolders) {
+      const subFolder = await Folder.findOne({ _id: subId, user: userId });
+      if (subFolder) {
+        if (!subFolder.shareToken) {
+          subFolder.shareToken = crypto.randomBytes(8).toString("hex");
+        }
+        subFolder.isPublic = true;
+        await subFolder.save();
+        await makeSubfoldersPublicRecursively(subId, userId);
+      }
+    }
+  }
+};
+
+const revokeSubfoldersRecursively = async (folderId, userId) => {
+  const folder = await Folder.findOne({ _id: folderId, user: userId });
+  if (!folder) return;
+
+  if (folder.subfolders && folder.subfolders.length > 0) {
+    for (const subId of folder.subfolders) {
+      const subFolder = await Folder.findOne({ _id: subId, user: userId });
+      if (subFolder) {
+        subFolder.isPublic = false;
+        subFolder.shareToken = null;
+        await subFolder.save();
+        await revokeSubfoldersRecursively(subId, userId);
+      }
+    }
+  }
+};
+
 // Make folder public by generating a share token
 exports.createShare = async (req, res) => {
   try {
@@ -343,6 +379,8 @@ exports.createShare = async (req, res) => {
     }
     folder.isPublic = true;
     await folder.save();
+
+    await makeSubfoldersPublicRecursively(folderId, userId);
 
     const frontend = process.env.FRONTEND_URL || null;
     const shareUrl = frontend
@@ -370,6 +408,8 @@ exports.revokeShare = async (req, res) => {
     folder.shareToken = null;
     await folder.save();
 
+    await revokeSubfoldersRecursively(folderId, userId);
+
     return res.status(200).json({ message: "Share revoked" });
   } catch (error) {
     return res
@@ -385,6 +425,7 @@ exports.getSharedFolderByToken = async (req, res) => {
     const folder = await Folder.findOne({ shareToken: token, isPublic: true })
       .populate({ path: "bookmarks", options: { sort: { createdAt: -1 } } })
       .populate({ path: "resources" })
+      .populate({ path: "subfolders", options: { sort: { createdAt: -1 } } })
       .populate({ path: "user", select: "username" });
     if (!folder)
       return res.status(404).json({ message: "Shared folder not found" });
